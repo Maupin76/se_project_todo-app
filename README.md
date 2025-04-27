@@ -30,4 +30,4 @@ Object-Oriented Programming (OOP) – JavaScript classes used for better modular
 
 This project is deployed on GitHub Pages:
 
-[- ADD LINK HERE](https://maupin76.github.io/se_project_todo-app/)
+[- Check out the To-Do App Here](https://maupin76.github.io/se_project_todo-app/)
