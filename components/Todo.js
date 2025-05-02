@@ -8,11 +8,11 @@ class Todo {
     this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
     this._todoDeleteBtn.addEventListener("click", () => {
       this._todoElement.remove();
+      this._todoElement = null; // Helps garbage collection
     });
 
     this._todoCheckboxEl.addEventListener("change", () => {
       this._data.completed = !this._todoCheckboxEl.checked;
-      console.log(this._data.completed);
     });
   }
 
