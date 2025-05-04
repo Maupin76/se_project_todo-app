@@ -43,7 +43,6 @@ addTodoForm.addEventListener("submit", (evt) => {
 
   renderTodo(values);
   closeModal(addTodoPopup);
-  addTodoForm.reset();
 });
 
 // Initial Rendering
