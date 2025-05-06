@@ -16,7 +16,7 @@ const todosList = document.querySelector(".todos__list");
 // Utility Functions
 const generateTodo = (data) => {
   const todo = new Todo(data, "#todo-template", (isCompleted) => {
-    todoCounter.updateCompleted(isCompleted); // updates count based on state
+    todoCounter.updateCompleted(isCompleted);
   });
   return todo.getView();
 };

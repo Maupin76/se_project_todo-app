@@ -4,26 +4,26 @@ class Popup {
     this._handleEscapeClose = this._handleEscapeClose.bind(this);
   }
 
-  // Public method: open popup
+  //Open popup
   open() {
     this._popup.classList.add("popup_visible");
     document.addEventListener("keydown", this._handleEscapeClose);
   }
 
-  // Public method: close popup
+  //Close popup
   close() {
     this._popup.classList.remove("popup_visible");
     document.removeEventListener("keydown", this._handleEscapeClose);
   }
 
-  // Private method: ESC key closes popup
+  //ESC key closes popup
   _handleEscapeClose(evt) {
     if (evt.key === "Escape") {
       this.close();
     }
   }
 
-  // Public method: adds event listeners to close button and overlay
+  //Adds event listeners to close button and overlay
   setEventListeners() {
     const closeBtn = this._popup.querySelector(".popup__close");
     closeBtn.addEventListener("click", () => this.close());
