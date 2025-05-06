@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import { initialTodos, validationConfig } from "../utils/constants.js";
 import Todo from "../components/Todo.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../utils/Section.js";
 
 // DOM Elements
 const addTodoButton = document.querySelector(".button_action_add");
@@ -19,10 +20,21 @@ const generateTodo = (data) => {
   return todo.getView();
 };
 
-const renderTodo = (item) => {
-  const todoElement = generateTodo(item);
-  todosList.append(todoElement);
-};
+const section = new Section({
+  items: [...initialTodos],
+  renderer: (item) => {
+    const todoElement = generateTodo(item);
+    todosList.append(todoElement);
+  },
+  containerSelector: ".todos__list",
+});
+
+section.renderItems();
+
+// const renderTodo = (item) => {
+//   const todoElement = generateTodo(item);
+//   todosList.append(todoElement);
+// };
 
 // Event Listeners
 addTodoButton.addEventListener("click", () => openModal(addTodoPopup));
@@ -34,19 +46,20 @@ addTodoForm.addEventListener("submit", (evt) => {
   const name = evt.target.name.value;
   const dateInput = evt.target.date.value;
 
-  // Normalize date for timezone offset
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
   const id = uuidv4();
   const values = { name, date, id };
 
-  renderTodo(values);
+  const todoElement = generateTodo(values);
+  section.addItem(todoElement);
+
   closeModal(addTodoPopup);
 });
 
 // Initial Rendering
-initialTodos.forEach(renderTodo);
+// initialTodos.forEach(renderTodo);
 
 // Form Validation
 const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
