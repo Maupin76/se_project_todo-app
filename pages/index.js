@@ -8,16 +8,24 @@ import TodoCounter from "../components/TodoCounter.js";
 
 // DOM Elements
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
 
 // Utility Functions
 const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template", (isCompleted) => {
-    todoCounter.updateCompleted(isCompleted);
-  });
+  const todo = new Todo(
+    data,
+    "#todo-template",
+    (isCompleted) => {
+      todoCounter.updateCompleted(isCompleted);
+    },
+    (wasCompleted) => {
+      if (wasCompleted) {
+        todoCounter.updateCompleted(false);
+      }
+      todoCounter.updateTotal(false);
+    }
+  );
   return todo.getView();
 };
 

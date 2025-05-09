@@ -1,8 +1,9 @@
 class Todo {
-  constructor(data, selector, onToggle) {
+  constructor(data, selector, onToggle, onDelete) {
     this._data = data;
     this._templateElement = document.querySelector(selector);
     this._onToggle = onToggle;
+    this._onDelete = onDelete;
   }
 
   _setEventListeners() {
@@ -10,6 +11,9 @@ class Todo {
     this._todoDeleteBtn.addEventListener("click", () => {
       this._todoElement.remove();
       this._todoElement = null;
+      if (this._onDelete) {
+        this._onDelete(this._data.completed); //
+      }
     });
 
     this._todoCheckboxEl.addEventListener("change", () => {
@@ -44,7 +48,7 @@ class Todo {
         )}`;
       }
     } else {
-      this._todoDate.textContent = ""; // no due date set
+      this._todoDate.textContent = "";
     }
   }
 
