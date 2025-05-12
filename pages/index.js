@@ -29,6 +29,11 @@ const generateTodo = (data) => {
   return todo.getView();
 };
 
+const renderTodo = (item) => {
+  const todoElement = generateTodo(item);
+  section.addItem(todoElement);
+};
+
 const handleAddTodoSubmit = (formData) => {
   const date = new Date(formData.date);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
@@ -40,20 +45,16 @@ const handleAddTodoSubmit = (formData) => {
     completed: false,
   };
 
-  const todoElement = generateTodo(newTodo);
-  section.addItem(todoElement);
+  renderTodo(newTodo);
 
-  //Update total todo count
   todoCounter.updateTotal(true);
-
   popupAddTodo.close();
 };
 
 const section = new Section({
   items: [...initialTodos],
   renderer: (item) => {
-    const todoElement = generateTodo(item);
-    todosList.append(todoElement);
+    renderTodo(item);
   },
   containerSelector: ".todos__list",
 });
